@@ -10,6 +10,9 @@ Taller de Crawling Web en la plataforma KeepCoding
   - [2.4 Casos de éxito](#24-casos-de-%c3%a9xito)
 - [3. Scrapy](#3-scrapy)
   - [3.1 Ejemplo de spider](#31-ejemplo-de-spider)
+- [4. Data handling / formatting](#4-data-handling--formatting)
+- [5. Scrapping y Crawling](#5-scrapping-y-crawling)
+- [5. Robots.txt](#5-robotstxt)
 
 # 1. Introducción
 
@@ -50,6 +53,9 @@ Uno de los usos más frecuentes que se les da consiste en crear una copia de tod
 
 # 3. Scrapy
 
+- **Scrapy** es un framework escrito en Python utilizado para extraer datos de sitios webs.
+  - Para extraer estos datos se pueden utilizar expresiones regulares, XPath, buscar mediante clases/estilos CSS, etc.
+
 ## 3.1 Ejemplo de spider
 ```python
 import scrapy
@@ -81,3 +87,25 @@ class BlogSpider(scrapy.Spider):
             if (self.count < self.COUNT_MAX):
                 yield response.follow(next_page, self.parse)
 ```
+
+# 4. Data handling / formatting
+
+![Data handling](resources/images/02.png)
+
+- Cómo se van a tratar los datos extraídos.
+  - HTML: scrapy en cloud.
+  - Json: archivos enviados a Google Cloud Storage o Amazon S3.
+  - Mongo: MongoDB en Google Cloud Compute Engine o AWS EC2.
+  
+# 5. Scrapping y Crawling
+
+- **Scrapping**: una página web a la que se le ejecuta un *scraper* y produce datos (xml, csv, etc). 
+- **Crawler**: proceso que ve cuántos links hay en una web y genera una lista e indexa y guarda en una base de datos.
+
+![Scrapping](resources/images/03.png)
+![Crawling](resources/images/04.png)
+
+# 5. Robots.txt
+
+- Fichero que contiene reglas que dice que se quiere permitir (o no) a nivel de crawlers, bots, etc.
+- Si alguna web tiene *disallow* en alguna página o en la web completa, *Scrapy* no puede seguir con el procesos de *crawling*.
